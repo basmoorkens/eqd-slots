@@ -18,9 +18,17 @@
   </head>
 
   <body>
-    <!-- triky -->
-    <div id="triky">
+    <div id="slot">
       <div class="container">
+        <div id="login">
+          <h1>
+            Login with your stellar public key
+          </h1>
+          <div id="loginDetail">
+            <input type="text" id="publicKey" size="70" />
+            <a href="#" id="submitPublicKey">login</a>
+          </div>
+        </div>
         <div id="spinHeader">
           <h1>EQD Spin to win</h1>
       </div>
@@ -81,7 +89,7 @@ function getSpinResult () {
   return Math.floor((Math.random() * 4) + 1);
 }
 
-btnTriky.addEventListener('click', () => triky.shuffle(5));
+btnTriky.addEventListener('click', () => triky.shuffle(10));
     </script>
 
 
