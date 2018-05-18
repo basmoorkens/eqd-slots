@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./styles/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="./library/jQuery-SlotMachine/jquery.slotmachine.css" type="text/css" media="screen" />
 
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="./library/jQuery-SlotMachine/slotmachine.js"></script>
     <script src="./library/jQuery-SlotMachine/jquery.slotmachine.js"></script>
@@ -20,37 +21,56 @@
     <!-- triky -->
     <div id="triky">
       <div class="container">
-        <h1>EQD Spin to win</h1>
-        <div class="row">
-          <div class="col-sm-10 col-md-5 offset-sm-1 offset-md-1">
-            <pre><code id="codeBlock4"></code></pre>
-          </div>
-
-          <div class="col-sm-10 col-md-5 offset-sm-1 offset-md-1">
-            <div id="triky1">
-              <div>
-                <img src="img/1.png" />
+        <div id="spinHeader">
+          <h1>EQD Spin to win</h1>
+      </div>
+      <div id="spinnerBody">
+          <div id="spinner">
+              <div class="slotResult topLine">
+                10
               </div>
-              <div>
-                <img src="img/50.jpg" />
+              <div class="slotResult topLine">
+                100
               </div>
-              <div>
-                <img src="img/100.jpg" />
+              <div class="slotResult topLine">
+                500
               </div>
-              <div>
-                <img src="img/1000.jpg" />
+              <div class="slotResult topLine">
+                1000
+              </div>
+              <div class="slotResult topLine bottomLine">
+                5000
               </div>
             </div>
-          </div>
-          <div class="btn-group btn-group-justified" role="group">
-            <button id="trikyShuffle" type="button" class="btn btn-primary btn-lg">Spin!</button>
-          </div>
         </div>
+          <div id="spinFooter">
+            <div id="credits">
+              Credits
+              <span id="creditsValue">
+                100
+              </span>
+            </div>
+            <div id="betAmount">
+              Bet
+              <span id="betAmountValue">
+                100
+              </span>
+            </div>
+            <div id="lastResult">
+              Last result
+              <span id="lastResultValue">
+                100
+              </span>
+            </div>
+            <div id="spinButtonContainer">
+              <a href="#" id="spinButton">Spin</a>
+            </div>
+          </div>
       </div>
     </div>
     <script id="codeScript4">
-const btnTriky = document.querySelector('#trikyShuffle');
-const elTriky = document.querySelector('#triky1');
+const btnTriky = document.querySelector('#spinButton');
+const elTriky = document.querySelector('#spinner');
 const triky = new SlotMachine(elTriky, {
   randomize() {
     return getSpinResult();
