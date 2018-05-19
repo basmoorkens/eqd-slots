@@ -8,6 +8,10 @@
     font-family: 'Pathway Gothic One';
 }
 
+body, html {
+  height:100%;
+}
+
 code {
   border: 1px solid #eee;
   border-radius: 5px;
@@ -250,7 +254,7 @@ header a {
    background-color: #0F99CA;
    border-bottom: 10px solid rgb(180, 75, 119);
    border-top: 20px dashed #195AC8;
-   background-position-x: calc(100% + 40px)
+   height:100%;
  }
 
 
@@ -440,10 +444,44 @@ padding-top:1em;
 }
 
 #login input {
-border-radius: 3px;
-background-color:#89AAE6; 
-font-size:0.9em;
-margin-left:10%;
-margin-right:10%;
-margin-bottom:1em;
+  border-radius: 3px;
+  background-color:#89AAE6; 
+  font-size:0.9em;
+  margin-left:10%;
+  margin-right:10%;
+  margin-bottom:1em;
+}
+
+#loggedIn {
+  display:none;
+  margin-left:20%;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  text-transform: uppercase;
+  background-color: #0471A6;
+  color:white;
+  border:  #195AC8 solid 3px;
+  border-bottom: #195AC8 solid 3px;
+  margin-left:20%;
+  margin-right: 20%;
+  border-radius: 10px;
+  text-transform: uppercase;
+  height:7em;
+  padding-top:1em;
+}
+
+#loggedIn h1{
+  font-size: 26px;
+  padding-bottom:5px;
+  margin-bottom: 0px;
+}
+
+#loggedInAs{
+  font-size:1em;
+  text-align: center;
+  margin-left:5%;
+}
+
+#slotMachine{
+visibility: hidden;
 }

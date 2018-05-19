@@ -3,11 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>jQuery Slot Machine</title>
+    <title>EQD spin to win</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
 
-
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./styles/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="./library/jQuery-SlotMachine/jquery.slotmachine.css" type="text/css" media="screen" />
 
@@ -20,48 +23,56 @@
   <body>
     <div id="slot">
       <div class="container">
-        <div id="login">
+      <div id="login">
           <h1>
             Login with your stellar public key
           </h1>
           <div id="loginDetail">
             <input type="text" id="publicKey" size="70" />
-            <a href="#" id="submitPublicKey">login</a>
+            <a href="#" id="loginButton">login</a>
           </div>
-        </div>
-        <div id="spinHeader">
-          <h1>EQD Spin to win</h1>
       </div>
-      <div id="spinnerBody">
-          <div id="spinner">
-              <div class="slotResult topLine">
-                10
-              </div>
-              <div class="slotResult topLine">
-                100
-              </div>
-              <div class="slotResult topLine">
-                500
-              </div>
-              <div class="slotResult topLine">
-                1000
-              </div>
-              <div class="slotResult topLine bottomLine">
-                5000
-              </div>
-            </div>
+      <div id="loggedIn">
+          <h1>
+            Playing as 
+          </h1>
+          <span id="loggedInAs"></span>
+      </div>
+
+      <div id="slotMachine">
+        <div id="spinHeader">
+            <h1>EQD Spin to win</h1>
         </div>
+        <div id="spinnerBody">
+            <div id="spinner">
+                <div class="slotResult topLine">
+                  10
+                </div>
+                <div class="slotResult topLine">
+                  100
+                </div>
+                <div class="slotResult topLine">
+                  500
+                </div>
+                <div class="slotResult topLine">
+                  1000
+                </div>
+                <div class="slotResult topLine bottomLine">
+                  5000
+                </div>
+              </div>
+          </div>
           <div id="spinFooter">
             <div id="credits">
               Credits
               <span id="creditsValue">
-                100
+                0
               </span>
             </div>
             <div id="betAmount">
               Bet
               <span id="betAmountValue">
-                100
+                
               </span>
             </div>
             <div id="lastResult">
@@ -76,10 +87,14 @@
           </div>
       </div>
     </div>
-    <script id="codeScript4">
-const btnTriky = document.querySelector('#spinButton');
+    </div>
+<script id="codeScript4">
+const betAmount = 100;
+const loginButton = document.querySelector('#loginButton');
+const spinButton = document.querySelector('#spinButton');
 const elTriky = document.querySelector('#spinner');
-const triky = new SlotMachine(elTriky, {
+var playerWalletInfo;
+const slotMachine = new SlotMachine(elTriky, {
   randomize() {
     return getSpinResult();
   }
@@ -89,8 +104,31 @@ function getSpinResult () {
   return Math.floor((Math.random() * 4) + 1);
 }
 
-btnTriky.addEventListener('click', () => triky.shuffle(10));
-    </script>
+function renderPlayerWalletInfo() {
+  if(playerWalletInfo != null) {
+    $("#login").hide(1000);
+    $("#loggedIn").show(0);
+    $("#loggedInAs").text(playerWalletInfo.publicKey);
+    $("#creditsValue").text(playerWalletInfo.amount);
+    $("#slotMachine").css('visibility', 'visible');
+  }
+}
+$( document ).ready(function() {
+  $("#betAmountValue").text(betAmount);
+  spinButton.addEventListener('click', () => slotMachine.shuffle(5));
+  loginButton.addEventListener('click', function() {
+    var publicKeyInput = document.getElementById("publicKey");
+    $.post("http://localhost:8080/fundsinwalletfor", {publicKey: publicKeyInput.value}, function(response){
+      playerWalletInfo = response;
+      renderPlayerWalletInfo();
+    }).fail(function(response) {
+      var jsonResponse = JSON.parse(response.responseText);
+      alert('Error logging in: ' + jsonResponse.message)
+    });
+  });   
+});
+
+</script>
 
 
   </body>
