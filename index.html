@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="./library/jQuery-SlotMachine/slotmachine.js"></script>
     <script src="./library/jQuery-SlotMachine/jquery.slotmachine.js"></script>
+    <script src="./js/config.js"></script>
   </head>
 
   <body>
@@ -25,8 +26,9 @@
         <div id="lastResults">
           <h1>Last 10 spins paid out to you</h1>
           <span class="disc">
-            Your winnings are displayed here when we actualy made the transaction on the blockchain to your public key.<br />
-            It might take the application some time to payout your winnings depending on the load.
+            Your winnings are displayed here when we actualy wrote the transaction on the blockchain to your public key.<br />
+            It might take the application some time to payout your winnings depending on the load.<br />
+            Refresh the page and login again to see an update.
           </span>
           <table id="lastResultsTable">
             <tr>
@@ -103,7 +105,6 @@
     </div>
     </div>
 <script id="codeScript4">
-const betAmount = 100;
 const loginButton = document.querySelector('#loginButton');
 const spinButton = document.querySelector('#spinButton');
 const elTriky = document.querySelector('#spinner');
@@ -117,8 +118,8 @@ const slotMachine = new SlotMachine(elTriky, {
 });
 
 function getSpinResult () {
-   $.post("http://localhost:8080/playslots", {publicKey: playerWalletInfo.publicKey}, function(response){
-      playerWalletInfo.amount -= 100;
+   $.post(applicationConfiguration.backendUrl +"playslots", {publicKey: playerWalletInfo.publicKey}, function(response){
+      playerWalletInfo.amount -= applicationConfiguration.betAmount;
       lastWinning = response.amount;
       updateDynamicPlayerWalletInfo();
       spinResult = response.followNumber;
@@ -139,7 +140,7 @@ function renderPlayerWalletInfo() {
     $("#loggedIn").show(0);
     $("#loggedInAs").text(playerWalletInfo.publicKey);
     $("#slotMachine").css('visibility', 'visible');
-    $("#lastResults").show(0);
+    $("#lastResults").show(100);
     updateDynamicPlayerWalletInfo();
     renderLastResults();
   }
@@ -150,17 +151,18 @@ function renderLastResults() {
     var lastResult = playerWalletInfo.lastResults[i];
     $("#lastResultsTable tbody").append("<tr><td>"+ lastResult.wonTime+"</td><td>"+ lastResult.amount +"</td><td>"+ lastResult.blockchainHash +"</td></tr>");
   }
+  $("#lastResults").show(1000);
 }
 
 $( document ).ready(function() {
-  $("#betAmountValue").text(betAmount);
+  $("#betAmountValue").text(applicationConfiguration.betAmount);
   spinButton.addEventListener('click', function () { 
     getSpinResult();
-    slotMachine.shuffle(10); 
+    slotMachine.shuffle(6); 
   });
   loginButton.addEventListener('click', function() {
     var publicKeyInput = document.getElementById("publicKey");
-    $.post("http://localhost:8080/loginPublicKey", {publicKey: publicKeyInput.value}, function(response){
+    $.post(applicationConfiguration.backendUrl + "loginPublicKey", {publicKey: publicKeyInput.value}, function(response){
       playerWalletInfo = response;
       renderPlayerWalletInfo();
     }).fail(function(response) {
@@ -175,7 +177,6 @@ $( document ).ready(function() {
 });
 
 </script>
-
 
   </body>
 </html>
