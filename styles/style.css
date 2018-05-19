@@ -383,6 +383,7 @@ height:4.5em;
   font-size:2em;
   padding-top:0.2em;
   padding-bottom:0.3em;
+  border:  #195AC8 solid 3px;
 }
 
 #spinButtonContainer a:link, a:visited { 
