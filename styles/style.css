@@ -39,7 +39,7 @@ h1 {
 }
 
 .container {
-  padding-top: 50px;
+  padding-top: 1%;
   padding-bottom: 50px;
 }
 
@@ -399,7 +399,7 @@ height:4.5em;
 #login{
 margin-left:20%;
 margin-bottom: 5%;
-margin-top: 5%;
+margin-top: 0%;
 text-transform: uppercase;
 background-color: #0471A6;
 color:white;
@@ -455,9 +455,9 @@ padding-top:1em;
 
 #loggedIn {
   display:none;
+  margin-top: 0%;
   margin-left:20%;
   margin-bottom: 5%;
-  margin-top: 5%;
   text-transform: uppercase;
   background-color: #0471A6;
   color:white;
@@ -485,4 +485,46 @@ padding-top:1em;
 
 #slotMachine{
 visibility: hidden;
+}
+
+#lastResults{
+  padding-left:3em;
+  margin-top: 1%;
+  float:right;
+  margin-right:0;
+  text-transform: uppercase;
+  background-color: #0471A6;
+  color:white;
+  border:  #195AC8 solid 3px;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 0px;
+  text-transform: uppercase;
+  height:70%;
+  padding-top:1em;
+}
+
+#lastResults h1{
+  font-size:1.65em;
+  padding-bottom:  0px;
+}
+
+.disc{
+ font-size:11px;
+ text-transform: none;
+}
+
+#lastResultsTable {
+  margin-top:3em;
+  width:100%;
+}
+
+#lastResultsTable th{
+  text-align: center;
+}
+
+#lastResultsTable td {
+  text-align: center;
+  font-size:10px;
 }

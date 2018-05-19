@@ -22,6 +22,20 @@
 
   <body>
     <div id="slot">
+        <div id="lastResults">
+          <h1>Last 10 spins paid out to you</h1>
+          <span class="disc">
+            Your winnings are displayed here when we actualy made the transaction on the blockchain to your public key.<br />
+            It might take the application some time to payout your winnings depending on the load.
+          </span>
+          <table id="lastResultsTable">
+            <tr>
+              <th>Time</th>
+              <th>Amount</th>
+              <th>Hash</th>
+            </tr>
+          </table>
+       </div>
       <div class="container">
       <div id="login">
           <h1>
@@ -87,17 +101,6 @@
           </div>
       </div>
     </div>
-
-    <div id="lastResults">
-      <table id="lastResultsTable">
-        <tr>
-          <th>Time</th>
-          <th>Amount</th>
-          <th>Status</th>
-          <th>Hash</th>
-        </tr>
-      </table>
-    </div>
     </div>
 <script id="codeScript4">
 const betAmount = 100;
@@ -105,10 +108,11 @@ const loginButton = document.querySelector('#loginButton');
 const spinButton = document.querySelector('#spinButton');
 const elTriky = document.querySelector('#spinner');
 var playerWalletInfo;
-var lastWinning;
+var lastWinning=0;
+var spinResult=0;
 const slotMachine = new SlotMachine(elTriky, {
   randomize() {
-    return getSpinResult();
+    return spinResult;
   }
 });
 
@@ -117,7 +121,7 @@ function getSpinResult () {
       playerWalletInfo.amount -= 100;
       lastWinning = response.amount;
       updateDynamicPlayerWalletInfo();
-      return response.followNumber;
+      spinResult = response.followNumber;
     }).fail(function(response) {
       var jsonResponse = JSON.parse(response.responseText);
       alert('Error when spinning: ' + jsonResponse.message)
@@ -126,6 +130,7 @@ function getSpinResult () {
 
 function updateDynamicPlayerWalletInfo() { 
     $("#creditsValue").text(playerWalletInfo.amount);
+    $("#lastResultValue").text(lastWinning);
 }
 
 function renderPlayerWalletInfo() {
@@ -143,13 +148,16 @@ function renderPlayerWalletInfo() {
 function renderLastResults() {
   for (var i = 0; i < playerWalletInfo.lastResults.length; i++) {
     var lastResult = playerWalletInfo.lastResults[i];
-    $("#lastResultsTable tbody").append("<tr><td>"+ lastResult.wonTime+"</td><td>"+ lastResult.amount +"</td><td>"+ lastResult.status +"</td><td>"+ lastResult.blockchainHash +"</td></tr>");
+    $("#lastResultsTable tbody").append("<tr><td>"+ lastResult.wonTime+"</td><td>"+ lastResult.amount +"</td><td>"+ lastResult.blockchainHash +"</td></tr>");
   }
 }
 
 $( document ).ready(function() {
   $("#betAmountValue").text(betAmount);
-  spinButton.addEventListener('click', () => slotMachine.shuffle(5));
+  spinButton.addEventListener('click', function () { 
+    getSpinResult();
+    slotMachine.shuffle(10); 
+  });
   loginButton.addEventListener('click', function() {
     var publicKeyInput = document.getElementById("publicKey");
     $.post("http://localhost:8080/loginPublicKey", {publicKey: publicKeyInput.value}, function(response){
