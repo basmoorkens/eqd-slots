@@ -11,14 +11,14 @@
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./styles/style.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="./library/jQuery-SlotMachine/jquery.slotmachine.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/styles/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/library/jquery.slotmachine.css" type="text/css" media="screen" />
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="./library/jQuery-SlotMachine/slotmachine.js"></script>
-    <script src="./library/jQuery-SlotMachine/jquery.slotmachine.js"></script>
-    <script src="./js/config.js"></script>
+    <script src="/library/slotmachine.js"></script>
+    <script src="/library/jquery.slotmachine.js"></script>
+    <script src="/js/config.js"></script>
   </head>
 
   <body>
@@ -147,9 +147,11 @@ function renderPlayerWalletInfo() {
 }
 
 function renderLastResults() {
-  for (var i = 0; i < playerWalletInfo.lastResults.length; i++) {
-    var lastResult = playerWalletInfo.lastResults[i];
-    $("#lastResultsTable tbody").append("<tr><td>"+ lastResult.wonTime+"</td><td>"+ lastResult.amount +"</td><td>"+ lastResult.blockchainHash +"</td></tr>");
+  if( playerWalletInfo.lastResults != null ) {
+    for (var i = 0; i < playerWalletInfo.lastResults.length; i++) {
+      var lastResult = playerWalletInfo.lastResults[i];
+      $("#lastResultsTable tbody").append("<tr><td>"+ lastResult.wonTime+"</td><td>"+ lastResult.amount +"</td><td>"+ lastResult.blockchainHash +"</td></tr>");
+    }
   }
   $("#lastResults").show(1000);
 }
