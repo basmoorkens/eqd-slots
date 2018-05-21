@@ -165,13 +165,12 @@ $( document ).ready(function() {
     $.post(applicationConfiguration.backendUrl + "loginPublicKey", {publicKey: publicKeyInput.value}, function(response){
       playerWalletInfo = response;
       renderPlayerWalletInfo();
-    }).fail(function(response) {
-      if ($.trim(response)){ 
+    }).fail(function(xhr) {
+        if(xhr.responseJSON != null) {
+          alert('Error logging in: ' + xhr.responseJSON.message );
+        } else {
           alert('Spin to win backend unavailable');
-      } else {
-          var jsonResponse = JSON.parse(response.responseText);
-          alert('Error logging in: ' + jsonResponse.message)
-      }
+        }
     });
   });   
 });
