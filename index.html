@@ -11,36 +11,87 @@
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/styles/style.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="/library/jquery.slotmachine.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="./styles/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="./library/jquery.slotmachine.css" type="text/css" media="screen" />
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="/library/slotmachine.js"></script>
-    <script src="/library/jquery.slotmachine.js"></script>
-    <script src="/js/config.js"></script>
+    <script src="./library/slotmachine.js"></script>
+    <script src="./library/jquery.slotmachine.js"></script>
+    <script src="./js/config.js"></script>
   </head>
 
   <body>
     <div id="slot">
-        <div id="lastResults">
-          <h1>Last 10 spins paid out to you</h1>
-          <span class="disc">
-            Your winnings are displayed here when we actualy wrote the transaction on the blockchain to your public key.<br />
-            It might take the application some time to payout your winnings depending on the load.<br />
-            Refresh the page and login again to see an update.
-          </span>
-          <table id="lastResultsTable">
-            <tr>
-              <th>Time</th>
-              <th>Amount</th>
-              <th>Hash</th>
-            </tr>
-          </table>
-       </div>
+        <div id="leftbar">
+           <div id="instructions">
+            <h1 class="upper">Instructions</h1>
+              <div>
+                <p>
+                  Welcome to <span class="upper">EQD spin to win</span>.<br /> 
+                  <span class="upper">EQD spin to win</span> is a browser game where you spin the wheel to win EQD.<br />
+                </p>
+                <hr class="styled" />
+                <p>
+                  To start playing the game you need to deposit EQD into the game wallet.<br />
+                  To deposit use any Stellar wallet and send the EQD to <span class="walletAddr">GD472ON4HETV466W3WNQMAKDLAGVJBLKFXV4RNPPDAKPYW6FIM36QBQI</span><br />
+                  It can take 5-10 minutes to register your wallet in the application and credit you with the funds you sent.
+                </p>
+                <hr class="styled" />
+                <p>
+                  After your account is created you can login to the application by using the public key from the wallet you sent the funds from.<br />
+                  The fee per spin is <b>100 EQD</b>. You can find the table with payouts beneath the instructions.<br />
+                  Winnings will sent to your wallet within 5-10 minutes of the spin depending on the load on the application. <br />
+                </p>
+                <hr class="styled" />
+                <p>
+                  PS. the application is set up to pay out 100% of the funds that go in it, so no cut for the house.<br />
+                  Good luck!
+                </p>
+              </div>
+          </div>
+          <div id="contact">
+            <h1 class="upper">Contact</h1>
+            <p>
+              If you have any questions or need support contact us on <a href="mailto:bas.moorkens@gmail.com">bas.moorkens@gmail.com</a><br />
+            </p>
+            <hr class="styled" />
+            <p>
+              Like the game? Consider dropping a Stellar donation to the dev on <span class="donate">GA7PSSZDIGORA7MK2QFNDLU3IYWIXOIPQU3NC7YHRWPSH43FFFZGVLG7</span>
+            </p>
+          </div>
+      </div>
+        <div id="rightbar">
+          <div id="payoutTable">
+            <h1 class="upper">Machine payouts</h1>
+            <p>
+              The machine spins between following prices
+            </p>
+             <span class="payoutEntry">10</span>
+             <span class="payoutEntry">100</span>
+             <span class="payoutEntry">500</span>
+             <span class="payoutEntry">1000</span>
+             <span class="payoutEntry">5000</span>
+          </div>
+          <div id="lastResults">
+            <h1>Last 10 payouts</h1>
+            <span class="disc">
+              Your winnings are displayed here when we actualy wrote the transaction on the blockchain to your public key.<br />
+              It might take the application some time to payout your winnings depending on the load.<br />
+              Refresh the page and login again to see an update.
+            </span>
+            <table id="lastResultsTable">
+              <tr>
+                <th>Time</th>
+                <th>Win</th>
+                <th>Blockchain hash</th>
+              </tr>
+            </table>
+         </div>
+        </div>
       <div class="container">
       <div id="login">
-          <h1>
+          <h1 class="upper">
             Login with your stellar public key
           </h1>
           <div id="loginDetail">

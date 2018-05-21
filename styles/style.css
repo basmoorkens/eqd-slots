@@ -378,7 +378,7 @@ height:4.5em;
 }
 
 #spinButtonContainer a { 
- border-radius: 10px;
+  border-radius: 10px;
   padding-left:1.5em;
   padding-right:1.5em;
   text-decoration:none;
@@ -400,21 +400,68 @@ height:4.5em;
   background-color:white;
 }
 
+#leftbar {
+  margin-top: 1%;
+  float:left;
+  margin-left:0;
+  color:white;
+  width:30%;
+}
+
+#instructions{
+  background-color: #0471A6;
+  border:  #195AC8 solid 3px;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left: 0px;
+  height:50%;
+  padding-top:1em;
+  padding-right:3em;
+  padding-left:1em;
+  font-size:15px;
+}
+
+#contact{
+  margin-top:5%;
+  background-color: #0471A6;
+  border:  #195AC8 solid 3px;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left: 0px;
+  height:30%;
+  padding-top:1em;
+  padding-right:3em;
+  padding-left:1em;
+  font-size:15px;
+}
+
+#contact a {
+  color:black;
+  font-weight: bold;
+}
+
 #login{
-margin-left:20%;
-margin-bottom: 5%;
-margin-top: 0%;
-text-transform: uppercase;
-background-color: #0471A6;
-color:white;
-border:  #195AC8 solid 3px;
-border-bottom: #195AC8 solid 3px;
-margin-left:20%;
-margin-right: 20%;
-border-radius: 10px;
-text-transform: uppercase;
-height:9em;
-padding-top:1em;
+  margin-left:20%;
+  margin-bottom: 5%;
+  margin-top: 0%;
+  text-transform: uppercase;
+  background-color: #0471A6;
+  color:white;
+  border:  #195AC8 solid 3px;
+  border-bottom: #195AC8 solid 3px;
+  margin-left:20%;
+  margin-right: 20%;
+  border-radius: 10px;
+  text-transform: uppercase;
+  height:9em;
+  padding-top:1em;
+}
+
+.donate {
+  font-weight:bold;
+  font-size:13px;
 }
 
 #login h1{
@@ -425,13 +472,15 @@ padding-top:1em;
 #login a { 
   margin-left:9.7%;
   border-radius: 10px;
-  padding-left:15em;
-  padding-right:15em;
+  padding-left:14.8em;
+  padding-right:14.8em;
   text-decoration:none;
   text-transform: uppercase;
   font-size:1em;
   padding-top:0.5em;
   padding-bottom:0.5em;
+  color: #195AC8;
+  font-weight: bold;
 }
 
 #login a:link, a:visited { 
@@ -461,7 +510,7 @@ padding-top:1em;
   display:none;
   margin-top: 0%;
   margin-left:20%;
-  margin-bottom: 5%;
+  margin-bottom:3%;
   text-transform: uppercase;
   background-color: #0471A6;
   color:white;
@@ -491,12 +540,14 @@ padding-top:1em;
   visibility: hidden;
 }
 
-#lastResults{
-  padding-left:3em;
-  margin-top: 1%;
+#rightbar{
+  margin-top:1%;
   float:right;
   margin-right:0;
-  text-transform: uppercase;
+  width:30%;
+}
+
+#payoutTable{
   background-color: #0471A6;
   color:white;
   border:  #195AC8 solid 3px;
@@ -504,22 +555,35 @@ padding-top:1em;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   border-right: 0px;
-  text-transform: uppercase;
-  height:60%;
+  height:20%;
+  padding-right:3em;
+  padding-left:1em;
+  font-size:15px;
+  padding-bottom:10px;
+}
+
+.payoutEntry{
+  display:block;
+  font-weight: bold;
+  text-align: left;
   width:30%;
+  font-size:15px;
+  letter-spacing: 0.3em;
+}
+
+#lastResults{
+  padding-left:1em;
+  margin-top: 5%;
+  background-color: #0471A6;
+  color:white;
+  border: #195AC8 solid 3px;
+  border-radius: 10px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 0px;
+  height:70%;
   padding-top:1em;
   display:none;
-}
-
-#lastResults h1{
-  font-size:1.65em;
-  padding-bottom:  0px;
-}
-
-.disc{
- font-size:13px;
- text-transform: none;
- font-style: italic;
 }
 
 #lastResultsTable {
@@ -529,6 +593,7 @@ padding-top:1em;
   background-color: #89AAE6;
   margin-top:3em;
   width:100%;
+  margin-bottom:20px;
 }
 
 #lastResultsTable th{
@@ -537,5 +602,25 @@ padding-top:1em;
 
 #lastResultsTable td {
   text-align: center;
-  font-size:10px;
+  letter-spacing: ;
+  font-size:13px;
+}
+
+.upper {
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-bottom:3px;
+}
+
+.walletAddr{
+  font-size:14px;
+  color:black;
+  font-weight: bold;
+}
+
+.styled {
+    color:white;
+      border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
