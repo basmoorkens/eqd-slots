@@ -38,10 +38,6 @@ h1 {
   padding-bottom: 25px;
 }
 
-.container {
-  padding-top: 1%;
-  padding-bottom: 50px;
-}
 
 a{
   color: #ccd500;
@@ -110,51 +106,6 @@ header a {
   font-weight: 700;
 }
 
-/*
- * Airlines
- */
-#plane {
-  width: 100%;
-  position: relative;
-  border-bottom: 10px solid #B8312F;
-  border-top: 20px dashed #66D4FF;
-  background-color: rgb(0, 175, 225);
-  background-image: url('../img/plane.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-}
-
-#plane .content {
-  width: 100%;
-  float: left;
-  font-size: 50px;
-  font-weight: 300;
-  line-height: 42px;
-  margin-top: 30px;
-  text-align: center;
-}
-
-#plane .content, footer .content{
-  font-family: 'Pathway Gothic One';
-  font-size: 70px;
-  font-weight: 300;
-  line-height: 80px;
-}
-
-.badge {
-  color: white;
-  vertical-align: middle;
-  font-size: 30px;
-  background-color: rgb(0, 175, 225);
-}
-
-#planeMachine {
-  height: 67px;
-  overflow: hidden;
-  display: inline-block;
-  text-align: left;
-}
 
 /*
  * SlotMachine
@@ -208,48 +159,6 @@ header a {
   padding: 10px !important;
 }
 
-/*
- * Watch
- */
-#watch {
-  border-top: 20px dashed rgb(72, 158, 48);
-  border-bottom: 10px solid #195AC8;
-  background-color: #46D265;
-}
-
-#watch h1 {
-  margin: 0px;
-}
-
-#watch .small {
-  text-align: center;
-  background: url('../img/watch.png') no-repeat 50% 50%;
-  height: 300px;
-}
-
-#watch1 {
-  margin-left: calc(50% - 42px);
-  transform: translateY(115px);
-  width: 80px;
-  height: 80px;
-}
-
-#watch1 .slotMachineContainer > div {
-  color: #fff;
-  height: 80px;
-  width: 80px;
-  font-size: 64px;
-}
-
-#watch .btn-group .btn {
-  border: none;
-  background-color: rgb(72, 158, 48);
-}
-
-#watch .btn-group .btn:hover, .btn-group .btn:focus {
-  background-color: rgb(72, 158, 48);
-}
-
  #slot {
    background-color: #0F99CA;
    border-bottom: 10px solid rgb(180, 75, 119);
@@ -276,9 +185,9 @@ background-color: #0471A6;
 color:white;
 border:  #195AC8 solid 3px;
 border-bottom: #195AC8 solid 3px;
-margin-left:20%;
-margin-right: 20%;
-border-top-right-radius: 10px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 0px;
 border-top-left-radius: 10px;
 }
 
@@ -289,12 +198,11 @@ border-top-left-radius: 10px;
 }
 
 #spinnerBody {
-  margin-left:20%;
-  margin-right:20%;
   background-color:#3685B5;
   border:  #195AC8 solid 3px;
   border-top:none;
   border-bottom: none;
+  border-right: none;
 }
 
 #spinner { 
@@ -313,10 +221,10 @@ background-color: #0471A6;
 color:white;
 border:  #195AC8 solid 3px;
 border-bottom: #195AC8 solid 3px;
-margin-left:20%;
-margin-right: 20%;
-border-bottom-right-radius: 10px;
 border-bottom-left-radius: 10px;
+border-top-right-radius: 0px;
+border-bottom-right-radius: 0px;
+border-right: 0px;
 text-transform: uppercase;
 height:4.5em;
 }
@@ -400,14 +308,6 @@ height:4.5em;
   background-color:white;
 }
 
-#leftbar {
-  margin-top: 1%;
-  float:left;
-  margin-left:0;
-  color:white;
-  width:30%;
-}
-
 #instructions{
   background-color: #0471A6;
   border:  #195AC8 solid 3px;
@@ -443,7 +343,6 @@ height:4.5em;
 }
 
 #login{
-  margin-left:20%;
   margin-bottom: 5%;
   margin-top: 0%;
   text-transform: uppercase;
@@ -451,17 +350,19 @@ height:4.5em;
   color:white;
   border:  #195AC8 solid 3px;
   border-bottom: #195AC8 solid 3px;
-  margin-left:20%;
-  margin-right: 20%;
   border-radius: 10px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right: 0px;
   text-transform: uppercase;
   height:9em;
   padding-top:1em;
+  width:100%;
 }
 
 .donate {
   font-weight:bold;
-  font-size:13px;
+  font-size:11px;
 }
 
 #login h1{
@@ -469,18 +370,28 @@ height:4.5em;
   padding-bottom:  0px;
 }
 
-#login a { 
-  margin-left:9.7%;
+#publicKey {
+  margin-left:10%;
+  width:80%;
+}
+
+#loginButton {
+  margin-left:10%;
+  margin-right:10%;
   border-radius: 10px;
-  padding-left:14.8em;
-  padding-right:14.8em;
+  width:80%;
   text-decoration:none;
   text-transform: uppercase;
   font-size:1em;
   padding-top:0.5em;
   padding-bottom:0.5em;
-  color: #195AC8;
   font-weight: bold;
+  padding-left:37%;
+  padding-right:37%;
+}
+
+#login a { 
+    color: #195AC8;
 }
 
 #login a:link, a:visited { 
@@ -495,6 +406,7 @@ height:4.5em;
 
 #loginDetail{
   float:left;
+  width:100%;
 }
 
 #login input {
@@ -509,19 +421,15 @@ height:4.5em;
 #loggedIn {
   display:none;
   margin-top: 0%;
-  margin-left:20%;
-  margin-bottom:3%;
   text-transform: uppercase;
   background-color: #0471A6;
   color:white;
   border:  #195AC8 solid 3px;
   border-bottom: #195AC8 solid 3px;
-  margin-left:20%;
-  margin-right: 20%;
   border-radius: 10px;
   text-transform: uppercase;
-  height:7em;
-  padding-top:1em;
+  height:15%;
+  width:100%;
 }
 
 #loggedIn h1{
@@ -540,12 +448,21 @@ height:4.5em;
   visibility: hidden;
 }
 
-#rightbar{
-  margin-top:1%;
-  float:right;
-  margin-right:0;
-  width:30%;
+#leftbar {
+  margin-top: 1%;
+  float:left;
+  margin-left:0;
+  color:white;
+  width:40%;
 }
+
+#container {
+  padding-top: 1%;
+  padding-bottom: 50px;
+  width:55%;
+  margin-left:45%;
+}
+
 
 #payoutTable{
   background-color: #0471A6;
@@ -573,14 +490,15 @@ height:4.5em;
 
 #lastResults{
   padding-left:1em;
+  padding-right:1em;
   margin-top: 5%;
   background-color: #0471A6;
   color:white;
   border: #195AC8 solid 3px;
   border-radius: 10px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-right: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left: 0px;
   height:70%;
   padding-top:1em;
   display:none;
@@ -591,7 +509,7 @@ height:4.5em;
   border-radius: 5px;
   color:#195AC8;
   background-color: #89AAE6;
-  margin-top:3em;
+  margin-top:2%;
   width:100%;
   margin-bottom:20px;
 }
@@ -613,14 +531,13 @@ height:4.5em;
 }
 
 .walletAddr{
-  font-size:14px;
+  font-size:11px;
   color:black;
   font-weight: bold;
 }
 
 .styled {
-    color:white;
-      border: 0;
-    height: 1px;
+    border: 0;
+    height: 2px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
