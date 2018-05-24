@@ -17,7 +17,6 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="./library/slotmachine.js"></script>
-    <script src="./library/jquery.slotmachine.js"></script>
     <script src="./js/config.js"></script>
   </head>
 
@@ -28,62 +27,73 @@
             <h1 class="upper">Instructions</h1>
               <div>
                 <p>
-                  Welcome to <span class="upper">EQD spin to win</span>.<br /> 
                   <span class="upper">EQD spin to win</span> is a browser game where you spin the wheel to win EQD.
                 </p>
                 <hr class="styled" />
                 <p>
+                  <h3 class="subtitle">How to register an account?</h3>
                   To start playing the game you need to deposit EQD into the game wallet.<br />
                   To deposit use any Stellar wallet and send the EQD to <span class="walletAddr">GD472ON4HETV466W3WNQMAKDLAGVJBLKFXV4RNPPDAKPYW6FIM36QBQI</span><br />
                   It can take 5-10 minutes to register your wallet in the application and credit you with the funds you sent.
                 </p>
                 <hr class="styled" />
                 <p>
+                  <h3 class="subtitle">How to play?</h3>
                   After your account is created you can login to the application by using the public key from the wallet you sent the funds from.<br />
-                  The fee per spin is <b>100 EQD</b>. You can find the table with payouts beneath the instructions.<br />
-                  Winnings will sent to your wallet within 5-10 minutes of the spin depending on the load on the application. <br />
+                  The fee per spin is <strong style="color:black">100 EQD</strong>. You can find the table with payouts beneath the instructions.<br />
+                  After each spin your account will be credited with the result of that spin.<br />
                 </p>
                   <hr class="styled" />
                 <p>
-                  You will spin one of following prices
-                 <span class="payoutEntry">10</span>
-                 <span class="payoutEntry">100</span>
-                 <span class="payoutEntry">500</span>
-                 <span class="payoutEntry">1000</span>
-                 <span class="payoutEntry">5000</span>
+                  <h3 class="subtitle">How to get a payout to your wallet?</h3>
+                  You can request a payout to your wallet by using the <strong style="color:black">payout</strong> button on the slotmachine.<br />
+                  Payouts can take 10 minutes depending on the number of users playing.
+                </p>
+                  <hr class="styled" />
+                <p>
+                  <h3 class="subtitle">Spin prices</h3>
+                  The prices in the spinmachine are 
+                 <span class="payoutEntry">10</span>,
+                 <span class="payoutEntry">100</span>,
+                 <span class="payoutEntry">500</span>,
+                 <span class="payoutEntry">1000</span>,
+                 <span class="payoutEntry">5000</span>.
                </p>
               <hr class="styled" />
                 <p>
-                  PS. the application is set up to pay out 100% of the funds that go in it, so no cut for the house.<br />
                   Good luck!
                 </p>
               </div>
           </div>
-            <div id="loggedIn">
-            <h1 class="upper">
-              Playing as 
-            </h1>
-            <span id="loggedInAs"></span>
-            </div>
            <div id="lastResults">
-            <h1>Last 10 payouts</h1>
-              <p>
-                Your winnings are displayed here when we actualy wrote the transaction on the blockchain to your public key.<br />
-                It might take the application some time to payout your winnings depending on the load.<br />
-                Refresh the page and login again to see an update.
+             <p>
+                <h3 class="subtitle">
+                  Playing as 
+                </h3>
+                <span id="loggedInAs"></span>
             </p>
-            <table id="lastResultsTable">
-              <tr>
-                <th>Time</th>
-                <th>Win</th>
-                <th>Blockchain hash</th>
-              </tr>
-            </table>
+            <hr class="styled" />
+            <p>
+              <h3 class="subtitle">Winnings</h3>
+                <p>
+                  The winnings of your last 10 spins are shown here.
+                </p>
+              <table id="lastResultsTable">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Win</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </p>
          </div>
           <div id="contact">
             <h1 class="upper">Contact</h1>
             <p>
-              If you have any questions or need support contact us on <a href="mailto:bas.moorkens@gmail.com">bas.moorkens@gmail.com</a><br />
+              If you have any questions or need support contact me on <a href="mailto:bas.moorkens@gmail.com">bas.moorkens@gmail.com</a><br />
             </p>
             <hr class="styled" />
             <p>
@@ -161,19 +171,36 @@ var spinResult=0;
 const slotMachine = new SlotMachine(elTriky, {
   randomize() {
     return spinResult;
+  },
+  onComplete() {
+      updateDynamicPlayerWalletInfo();
+      addResultToTable();
   }
 });
 
+var newResult;
+
 function getSpinResult () {
    $.post(applicationConfiguration.backendUrl +"playslots", {publicKey: playerWalletInfo.publicKey}, function(response){
-      playerWalletInfo.amount -= applicationConfiguration.betAmount;
-      lastWinning = response.amount;
-      updateDynamicPlayerWalletInfo();
-      spinResult = response.followNumber;
+      playerWalletInfo.amount = response.balance;
+      lastWinning = response.winning;
+      spinResult = response.spinFollowNumber;
+      newResult = {"wonTime":response.spinDateTime,"amount": response.winning};
+      addResultToTable();
     }).fail(function(response) {
-      var jsonResponse = JSON.parse(response.responseText);
-      alert('Error when spinning: ' + jsonResponse.message)
+      if(typeof response.responseText == 'undefined') {
+        alert('Spinmachine backend unavailable. No spin was deducted from your balance.');
+      } else {
+        var jsonResponse = JSON.parse(response.responseText);
+        alert('Error when spinning: ' + jsonResponse.message)
+      }
     });
+}
+
+function addResultToTable() {
+   $('#lastResultsTable tr:last').remove();
+   
+   $("<tr><td>"+ newResult.wonTime+"</td><td>"+ newResult.amount +"</td></tr>").insertBefore("#lastResultsTable > tbody > tr:first");
 }
 
 function updateDynamicPlayerWalletInfo() { 
@@ -185,8 +212,7 @@ function renderPlayerWalletInfo() {
   if(playerWalletInfo != null) {
     $("#login").hide(100);
     $("#instructions").hide(100);
-    $("#loggedIn").show(0);
-    $("#loggedInAs").text(playerWalletInfo.publicKey);
+    $("#loggedInAs").text(playerWalletInfo.publicKey.substring(0,15)+ "..." + playerWalletInfo.publicKey.substring(41,56));
     $("#slotMachine").css('visibility', 'visible');
     $("#lastResults").show(100);
     updateDynamicPlayerWalletInfo();
@@ -195,10 +221,10 @@ function renderPlayerWalletInfo() {
 }
 
 function renderLastResults() {
-  if( playerWalletInfo.lastResults != null ) {
-    for (var i = 0; i < playerWalletInfo.lastResults.length; i++) {
-      var lastResult = playerWalletInfo.lastResults[i];
-      $("#lastResultsTable tbody").append("<tr><td>"+ lastResult.wonTime+"</td><td>"+ lastResult.amount +"</td><td>"+ lastResult.blockchainHash +"</td></tr>");
+  if( playerWalletInfo.lastWinnings != null ) {
+    for (var i = 0; i < playerWalletInfo.lastWinnings.length; i++) {
+      var lastResult = playerWalletInfo.lastWinnings[i];
+      $("#lastResultsTable tbody").append("<tr><td>"+ lastResult.wonTime+"</td><td>"+ lastResult.amount +"</td></tr>");
     }
   }
   $("#lastResults").show(1000);
@@ -208,7 +234,7 @@ $( document ).ready(function() {
   $("#betAmountValue").text(applicationConfiguration.betAmount);
   spinButton.addEventListener('click', function () { 
     getSpinResult();
-    slotMachine.shuffle(6); 
+    slotMachine.shuffle(8); 
   });
   loginButton.addEventListener('click', function() {
     var publicKeyInput = document.getElementById("publicKey");
