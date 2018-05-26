@@ -11,6 +11,8 @@
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="./styles/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="./library/jquery.slotmachine.css" type="text/css" media="screen" />
 
@@ -151,8 +153,11 @@
             <div id="lastResult">
               Last result
               <span id="lastResultValue">
-                100
+
               </span>
+            </div>
+            <div id="payoutBuyttonContainer">
+              <a href="#" id="payoutButton">Payout</a>
             </div>
             <div id="spinButtonContainer">
               <a href="#" id="spinButton">Spin</a>
@@ -160,6 +165,17 @@
           </div>
       </div>
     </div>
+    </div>
+
+    <div id="payoutDialog" title="Request payout">
+        <h1 class="upper">Payouts</h1>
+        <p>
+          Fill in the amount you want to get paid out in the box below.<br />
+          <input type="text" id="amountToPay" style="width:100%"/>
+          <div id="doPayoutButtonContainer">
+              <a href="#" id="doPayoutButton">Payout</a>
+            </div>
+        </p>
     </div>
 <script id="codeScript4">
 const loginButton = document.querySelector('#loginButton');
@@ -180,13 +196,57 @@ const slotMachine = new SlotMachine(elTriky, {
 
 var newResult;
 
+$( "#payoutDialog" ).dialog({
+      autoOpen: false,
+      modal: true,
+      width: 600,
+      height: 350,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+ 
+ $( "#doPayoutButton" ).on( "click", function() {
+      var amount = $("#amountToPay").val();
+      if(isNaN(amount)){
+        alert("Amount to withdraw must be a number!");
+      } else {
+        if(amount <= 0) {
+          alert("Amount must be greater then 0!");
+        } else {
+          $.post(applicationConfiguration.backendUrl +"payout", {publicKey: playerWalletInfo.publicKey, amount: amount}, function(response){
+            alert("We have received your payout request for " + amount + "EQD. Payouts can take up to 10 minutes.");
+            playerWalletInfo.amount = playerWalletInfo.amount - amount;
+            renderPlayerWalletInfo();
+            $("#payoutDialog").dialog("close");
+            $("#amountToPay").val(0);
+          }).fail(function(response) {
+            if(typeof response.responseText == 'undefined') {
+              alert('Spinmachine backend unavailable. Could not submit payout request.');
+            } else {
+              var jsonResponse = JSON.parse(response.responseText);
+              alert('Error during payout request: ' + jsonResponse.message)
+            }
+          });
+        }
+      }
+    });
+
+    $( "#payoutButton" ).on( "click", function() {
+      $( "#payoutDialog" ).dialog( "open" );
+    });
+
 function getSpinResult () {
    $.post(applicationConfiguration.backendUrl +"playslots", {publicKey: playerWalletInfo.publicKey}, function(response){
       playerWalletInfo.amount = response.balance;
       lastWinning = response.winning;
       spinResult = response.spinFollowNumber;
       newResult = {"wonTime":response.spinDateTime,"amount": response.winning};
-      addResultToTable();
     }).fail(function(response) {
       if(typeof response.responseText == 'undefined') {
         alert('Spinmachine backend unavailable. No spin was deducted from your balance.');
