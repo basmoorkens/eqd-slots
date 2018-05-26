@@ -276,12 +276,12 @@ function renderPlayerWalletInfo() {
     $("#loggedInAs").text(playerWalletInfo.publicKey.substring(0,15)+ "..." + playerWalletInfo.publicKey.substring(41,56));
     $("#slotMachine").css('visibility', 'visible');
     $("#lastResults").show(100);
+    updateDynamicPlayerWalletInfo();
   }
 }
 
 function renderFullPlayerWalletInfo () {
   renderPlayerWalletInfo();
-  updateDynamicPlayerWalletInfo();
   renderLastResults();
 }
 
