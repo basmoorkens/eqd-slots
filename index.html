@@ -222,7 +222,7 @@ $( "#payoutDialog" ).dialog({
           $.post(applicationConfiguration.backendUrl +"payout", {publicKey: playerWalletInfo.publicKey, amount: amount}, function(response){
             alert("We have received your payout request for " + amount + "EQD. Payouts can take up to 10 minutes.");
             playerWalletInfo.amount = playerWalletInfo.amount - amount;
-            renderPlayerWalletInfo(false);
+            renderPlayerWalletInfo();
             $("#payoutDialog").dialog("close");
             $("#amountToPay").val(0);
           }).fail(function(response) {
@@ -269,18 +269,20 @@ function updateDynamicPlayerWalletInfo() {
     $("#lastResultValue").text(lastWinning);
 }
 
-function renderPlayerWalletInfo(renderLastResult) {
+function renderPlayerWalletInfo() {
   if(playerWalletInfo != null) {
     $("#login").hide(100);
     $("#instructions").hide(100);
     $("#loggedInAs").text(playerWalletInfo.publicKey.substring(0,15)+ "..." + playerWalletInfo.publicKey.substring(41,56));
     $("#slotMachine").css('visibility', 'visible');
     $("#lastResults").show(100);
-    updateDynamicPlayerWalletInfo();
-    if(renderLastResults) {
-      renderLastResults();
-    }
   }
+}
+
+function renderFullPlayerWalletInfo () {
+  renderPlayerWalletInfo();
+  updateDynamicPlayerWalletInfo();
+  renderLastResults();
 }
 
 function renderLastResults() {
@@ -303,7 +305,7 @@ $( document ).ready(function() {
     var publicKeyInput = document.getElementById("publicKey");
     $.post(applicationConfiguration.backendUrl + "loginPublicKey", {publicKey: publicKeyInput.value}, function(response){
       playerWalletInfo = response;
-      renderPlayerWalletInfo(true);
+      renderFullPlayerWalletInfo();
     }).fail(function(xhr) {
         if(xhr.responseJSON != null) {
           alert('Error logging in: ' + xhr.responseJSON.message );
