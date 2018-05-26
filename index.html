@@ -258,9 +258,10 @@ function getSpinResult () {
 }
 
 function addResultToTable() {
-   $('#lastResultsTable tr:last').remove();
-   
-   $("<tr><td>"+ newResult.wonTime+"</td><td>"+ newResult.amount +"</td></tr>").insertBefore("#lastResultsTable > tbody > tr:first");
+  if($('#lastResultsTable tr').length > 10) {
+      $('#lastResultsTable tr:last').remove();
+      $("<tr><td>"+ newResult.wonTime+"</td><td>"+ newResult.amount +"</td></tr>").insertBefore("#lastResultsTable > tbody > tr:first");
+  }
 }
 
 function updateDynamicPlayerWalletInfo() { 
