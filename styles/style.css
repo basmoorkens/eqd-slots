@@ -255,60 +255,48 @@ height:4.5em;
 #spinButtonContainer{
   margin-left:2em;
   float:left;
-  margin-top:0.5%;
-  margin-bottom:1%;
 }
 
-#spinButtonContainer a { 
+#spinButton { 
+  cursor: pointer;
   border-radius: 10px;
-  padding-left:1em;
-  padding-right:1em;
   text-decoration:none;
   text-transform: uppercase;
   font-size:2em;
-  padding-top:0.2em;
-  padding-bottom:0.3em;
   color:#195AC8;
-  border:  #195AC8 solid 3px;
-}
-
-#spinButtonContainer a:link, a:visited { 
   background-color:#89AAE6;
-  color:white;
+  border:  #195AC8 solid 3px;
+  padding-top:0.25%;
+  padding-bottom:0.25%;
+  margin-top:0.2em;
 }
 
-#spinButtonContainer a:hover { 
+#spinButton:hover{
   color:#89AAE6;
   background-color:white;
 }
 
-
 #payoutBuyttonContainer{
   margin-left:2em;
   float:left;
-  margin-top:0.5%;
   margin-bottom:1%;
 }
 
-#payoutBuyttonContainer a { 
+#payoutButton { 
+  cursor: pointer;
   border-radius: 10px;
-  padding-left:1em;
-  padding-right:1em;
   text-decoration:none;
   text-transform: uppercase;
   font-size:2em;
-  padding-top:0.2em;
-  padding-bottom:0.3em;
+  background-color:#89AAE6;
   color:#195AC8;
   border:  #195AC8 solid 3px;
+  padding-top:0.25%;
+  padding-bottom:0.25%;
+  margin-top:0.2em;
 }
 
-#payoutBuyttonContainer a:link, a:visited { 
-  background-color:#89AAE6;
-  color:white;
-}
-
-#payoutBuyttonContainer a:hover { 
+#payoutButton:hover{
   color:#89AAE6;
   background-color:white;
 }

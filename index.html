@@ -79,7 +79,8 @@
             <p>
               <h3 class="subtitle">Add credits</h3>
               To add more credits you can send more EQD from your wallet to the game wallet on<br />
-              <span style="color:black">GD472ON4HETV466W3WNQMAKDLAGVJBLKFXV4RNPPDAKPYW6FIM36QBQI</span>
+              <span style="color:black" class="donate">GD472ON4HETV466W3WNQMAKDLAGVJBLKFXV4RNPPDAKPYW6FIM36QBQI</span><br />
+              Incoming funds will be processed within 10 minutes.
             </p>
             <hr class="styled" />
             <p>
@@ -170,10 +171,10 @@
               </span>
             </div>
             <div id="payoutBuyttonContainer">
-              <a href="#" id="payoutButton">Payout</a>
+              <button id="payoutButton">Payout</button>
             </div>
             <div id="spinButtonContainer">
-              <a href="#" id="spinButton">Spin</a>
+              <button id="spinButton">Spin</button>
             </div>
           </div>
       </div>
@@ -204,6 +205,7 @@ const slotMachine = new SlotMachine(elTriky, {
   onComplete() {
       updateDynamicPlayerWalletInfo();
       addResultToTable();
+      document.getElementById("spinButton").disabled = false;
   }
 });
 
@@ -311,6 +313,7 @@ function renderLastResults() {
 $( document ).ready(function() {
   $("#betAmountValue").text(applicationConfiguration.betAmount);
   spinButton.addEventListener('click', function () { 
+    document.getElementById("spinButton").disabled = true;
     getSpinResult();
     slotMachine.shuffle(8); 
   });
