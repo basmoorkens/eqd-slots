@@ -563,3 +563,13 @@ height:4.5em;
   color:#89AAE6;
   background-color:white;
 }
+
+#privateKey {
+  margin-left:10%;
+  width:80%;
+}
+
+#adminStats{
+visibility: hidden;
+
+}
