@@ -1,0 +1,45 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>EQD spin to win</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+
+    <link rel="stylesheet" href="./styles/style.css" type="text/css" media="screen" />
+    <script src="./js/config.js"></script>
+  </head>
+  <body>
+     <div id="login">
+          <h1 class="upper">
+            Login with your private key
+          </h1>
+          <div id="loginDetail">
+            <input type="text" id="privateKey" />
+            <a href="#" id="loginButton">login</a>
+          </div>
+      </div>
+
+      <script type="text/javascript">
+        const loginButton = document.querySelector('#loginButton');
+        var adminStats;
+
+        $( document ).ready(function() {
+          loginButton.addEventListener('click', function() {
+            var privateKeyInput = document.getElementById("privateKey");
+            $.post(applicationConfiguration.backendUrl + "getAdminStats", {privateKey: privateKeyInput.value}, function(response){
+              adminStats = response;
+              alert('found admin stats');
+            }).fail(function(xhr) {
+                if(xhr.responseJSON != null) {
+                  alert('Error logging in: ' + xhr.responseJSON.message );
+                } else {
+                  alert('Spin to win backend unavailable');
+                }
+            });
+          });   
+        });
+      </script>
+  </body>
+</html>
