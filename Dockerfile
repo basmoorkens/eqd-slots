@@ -10,3 +10,4 @@ COPY ./js/* /usr/share/nginx/html/js/
 COPY ./library/* /usr/share/nginx/html/library/
 COPY ./styles/* /usr/share/nginx/html/styles/
 COPY ./index.html /usr/share/nginx/html/index.html 
+COPY ./admin.html /usr/share/nginx/html/admin.html
