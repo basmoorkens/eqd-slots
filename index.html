@@ -269,7 +269,7 @@ $( "#payoutDialog" ).dialog({
     });
 
 function getSpinResult () {
-   $.post(applicationConfiguration.backendUrl +"playslots", {publicKey: playerWalletInfo.publicKey}, function(response){
+   $.post(applicationConfiguration.backendUrl +"playSlots", {publicKey: playerWalletInfo.publicKey}, function(response){
       playerWalletInfo.amount = response.balance;
       lastWinning = response.winning;
       spinResult = response.spinFollowNumber;
