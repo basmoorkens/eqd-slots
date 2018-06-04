@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="./styles/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="./library/jquery.slotmachine.css" type="text/css" media="screen" />
-
+    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v2.0.0/dist/clipboard.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="./library/slotmachine.js"></script>
@@ -39,7 +39,10 @@
                 <p>
                   <h3 class="subtitle">How to start playing?</h3>
                   <p>
-                    * Create an account by depositing EQD from your wallet into the game wallet: <span class="walletAddr">GD472ON4HETV466W3WNQMAKDLAGVJBLKFXV4RNPPDAKPYW6FIM36QBQI</span><br />
+                    * Create an account by depositing EQD from your wallet into the game wallet:<br /><br />
+                    <span id="gameWalletAddr" class="walletAddr">GD472ON4HETV466W3WNQMAKDLAGVJBLKFXV4RNPPDAKPYW6FIM36QBQI</span>
+                    <button class="btncp" data-clipboard-target="#gameWalletAddr" style="margin-left:5px;"><i class="fa fa-copy"></i></button>
+                    <br /><br />
                     <small><i>It can take up to 10 minutes to process your deposit.</i></small><br />
                     <small><i>If you dont own Equid see the section below on how to get Equid</i></small>
                   </p>
@@ -57,14 +60,15 @@
                 <p>
                   <h3 class="subtitle">Get Equid</h3>
                   <p> 
-                    <a target="_blank" href="https://stellarterm.com/#exchange/EQD-equid.co/XLM-native">You can purchase Equid on the stellarterm exchange.</a><br />
-                    The issuing address for EQD is <span class="walletAddr">GCGEQJR3E5BVMQYSNCHPO6NPP3KOT4VVZHIOLSRSNLE2GFY7EWVSLLTN</span>
+                    <a target="_blank" href="https://stellarterm.com/#exchange/EQD-equid.co/XLM-native">You can purchase Equid on the stellarterm exchange.</a><br /><br />
+                    The issuing address for EQD is <span id="issuerWallet" class="walletAddr">GCGEQJR3E5BVMQYSNCHPO6NPP3KOT4VVZHIOLSRSNLE2GFY7EWVSLLTN</span>
+                    <button class="btncp" data-clipboard-target="#issuerWallet" style="margin-left:5px;"><i class="fa fa-copy"></i></button>
                   </p>
                 </p>
                 <hr class="styled" />
                 <p>
                   <h3 class="subtitle">Spin prizes</h3>
-                  The prizes in the spinmachine are 
+                  The prizes in the spinmachine are <br />
                  <span class="payoutEntry">0</span>,
                  <span class="payoutEntry">100</span>,
                  <span class="payoutEntry">500</span>,
@@ -105,7 +109,7 @@
             <p>
               <h3 class="subtitle">Add credits</h3>
               To add more credits you can send more EQD from your wallet to the game wallet on<br />
-              <span style="color:black" class="donate">GD472ON4HETV466W3WNQMAKDLAGVJBLKFXV4RNPPDAKPYW6FIM36QBQI</span><br />
+              <span style="color:black" class="walletAddr">GD472ON4HETV466W3WNQMAKDLAGVJBLKFXV4RNPPDAKPYW6FIM36QBQI</span><br />
               <small><i>The processing of your deposit may take up to 10 minutes.</i></small>
             </p>
             <hr class="styled" />
@@ -122,7 +126,9 @@
             </p>
             <hr class="styled" />
             <p>
-              Like the game? Consider dropping a Stellar donation to the dev on <span class="donate">GA7PSSZDIGORA7MK2QFNDLU3IYWIXOIPQU3NC7YHRWPSH43FFFZGVLG7</span>
+              Like the game? Consider dropping a Stellar donation to the dev on <br />
+              <span id="donateAddr" class="walletAddr">GA7PSSZDIGORA7MK2QFNDLU3IYWIXOIPQU3NC7YHRWPSH43FFFZGVLG7</span>
+              <button class="btncp" data-clipboard-target="#donateAddr" style="margin-left:5px;"><i class="fa fa-copy"></i></button>
             </p>
           </div>
       </div>
@@ -353,6 +359,8 @@ $( document ).ready(function() {
     });
   });   
 });
+
+new ClipboardJS('.btncp');
 
 </script>
 

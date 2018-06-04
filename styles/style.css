@@ -473,7 +473,6 @@ height:4.5em;
   border: #195AC8 solid 3px;
   border-radius: 10px;
   border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
   border-left: 0px;
   height:70%;
   padding-top:1em;
@@ -572,4 +571,8 @@ height:4.5em;
 #adminStats{
 visibility: hidden;
 
+}
+
+.btncp:hover{
+  cursor:pointer;
 }
