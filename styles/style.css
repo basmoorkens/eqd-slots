@@ -205,8 +205,9 @@ height:4.5em;
 
 #credits {
   float:left;
- margin-left:5%;
- font-size:1.2em;
+  margin-left:5%;
+  font-size: 0.8em;
+  margin-top: 0.5em;
 }
 
 #creditsValue {
@@ -216,12 +217,14 @@ height:4.5em;
   background-color: #89AAE6;
   border-radius: 10px;
   width:4.5em;
+  margin-top:5px;
 }
 
 #betAmount {
   margin-left:5%;
   float:left;
-  font-size:1.2em;
+      font-size: 0.8em;
+    margin-top: 0.5em;
   text-align: center;
 }
 
@@ -233,12 +236,14 @@ height:4.5em;
   background-color: #89AAE6;
   border-radius: 10px;
   width:4.5em;
+  margin-top:5px;
 }
 
 #lastResult {
   margin-left:5%;
   float:left;
-  font-size:1.2em;
+  font-size: 0.8em;
+  margin-top: 0.5em;
   text-align: center;
 }
 
@@ -249,7 +254,8 @@ height:4.5em;
   text-align: center;
   background-color: #89AAE6;
   border-radius: 10px;
-  width:5.5em;
+  width:4.5em;
+  margin-top:5px;
 }
 
 #spinButtonContainer{
@@ -262,13 +268,13 @@ height:4.5em;
   border-radius: 10px;
   text-decoration:none;
   text-transform: uppercase;
-  font-size:2em;
+  font-size:1.5em;
   color:#195AC8;
   background-color:#89AAE6;
   border:  #195AC8 solid 3px;
   padding-top:0.25%;
   padding-bottom:0.25%;
-  margin-top:0.2em;
+  margin-top:0.5em;
 }
 
 #spinButton:hover{
@@ -287,13 +293,13 @@ height:4.5em;
   border-radius: 10px;
   text-decoration:none;
   text-transform: uppercase;
-  font-size:2em;
+  font-size:1.5em;
   background-color:#89AAE6;
   color:#195AC8;
   border:  #195AC8 solid 3px;
   padding-top:0.25%;
   padding-bottom:0.25%;
-  margin-top:0.2em;
+  margin-top:0.5em;
 }
 
 #payoutButton:hover{
@@ -418,6 +424,7 @@ height:4.5em;
   text-align: center;
   width:100%;
   margin-left:1em;
+  font-size:12px;
 }
 
 #slotMachine{
@@ -485,7 +492,7 @@ height:4.5em;
   color:#195AC8;
   background-color: #89AAE6;
   margin-top:2%;
-  width:60%;
+  width:100%;
   margin-bottom:20px;
 }
 
@@ -508,6 +515,12 @@ height:4.5em;
 
 .walletAddr{
   font-size:0.5em;
+  color:black;
+  font-weight: bold;
+}
+
+.walletAddr2{
+  font-size:0.45em;
   color:black;
   font-weight: bold;
 }
