@@ -356,11 +356,10 @@ height:4.5em;
 
 .donate {
   font-weight:bold;
-  font-size:11px;
+  font-size:7px;
 }
 
 #login h1{
-  font-size:1.65em;
   padding-bottom:  0px;
 }
 
@@ -505,10 +504,11 @@ height:4.5em;
   text-transform: uppercase;
   font-weight: bold;
   padding-bottom:3px;
+  font-size: 1.5em;
 }
 
 .walletAddr{
-  font-size:11px;
+  font-size:0.5em;
   color:black;
   font-weight: bold;
 }

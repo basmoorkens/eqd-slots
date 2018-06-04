@@ -30,7 +30,7 @@
               <div>
                 <p>
                   Welcome to the <strong><i>EQD Spin to Win</i></strong> game. <br />
-                  In this game you can spin the wheel to win a EQD price.<br />
+                  In this game you can spin the wheel to win a EQD prize.<br />
                   This game was made to promote the EQD token and it pays out 100% of the funds that go into it + a bit extra ;-)<br />
                   For this reason the fee to spin is fixed to <strong style="color:black">100 EQD</strong><br />
                   Good luck!
@@ -47,7 +47,7 @@
                     * Login to the game by using the publickey from your wallet.
                   </p>
                   <p>
-                    * Spin the wheel to win prices.
+                    * Spin the wheel to win prizes.
                   </p>
                   <p>
                     * Request a payout if you wish to withdraw funds to your wallet.
@@ -63,8 +63,8 @@
                 </p>
                 <hr class="styled" />
                 <p>
-                  <h3 class="subtitle">Spin prices</h3>
-                  The prices in the spinmachine are 
+                  <h3 class="subtitle">Spin prizes</h3>
+                  The prizes in the spinmachine are 
                  <span class="payoutEntry">0</span>,
                  <span class="payoutEntry">100</span>,
                  <span class="payoutEntry">500</span>,
@@ -210,14 +210,17 @@ const elTriky = document.querySelector('#spinner');
 var playerWalletInfo;
 var lastWinning=0;
 var spinResult=0;
+var spinSucces = true;
 const slotMachine = new SlotMachine(elTriky, {
   randomize() {
     return spinResult;
   },
   onComplete() {
+    if(spinSucces) {
       updateDynamicPlayerWalletInfo();
       addResultToTable();
-      document.getElementById("spinButton").disabled = false;
+    }
+    document.getElementById("spinButton").disabled = false;
   }
 });
 
@@ -246,18 +249,18 @@ $( "#payoutDialog" ).dialog({
         if(amount <= 0) {
           alert("Amount must be greater then 0!");
         } else {
-          $.post(applicationConfiguration.backendUrl +"payout", {publicKey: playerWalletInfo.publicKey, amount: amount}, function(response){
+          $.post(applicationConfiguration.backendUrl +"payout?publicKey=" +playerWalletInfo.publicKey+ "&amount=" +amount, function(response){
             alert("We have received your payout request for " + amount + "EQD. Payouts can take up to 10 minutes.");
             playerWalletInfo.amount = playerWalletInfo.amount - amount;
             renderPlayerWalletInfo();
             $("#payoutDialog").dialog("close");
             $("#amountToPay").val(0);
-          }).fail(function(response) {
-            if(typeof response.responseText == 'undefined') {
-              alert('Spinmachine backend unavailable. Could not submit payout request.');
+          }).fail(function(xhr) {
+            console.log(xhr);
+            if(xhr.responseJSON != null) {
+              alert('Error whilst processing payout: ' + xhr.responseJSON.message );
             } else {
-              var jsonResponse = JSON.parse(response.responseText);
-              alert('Error during payout request: ' + jsonResponse.message)
+              alert('Spin to win backend unavailable');
             }
           });
         }
@@ -269,17 +272,24 @@ $( "#payoutDialog" ).dialog({
     });
 
 function getSpinResult () {
-   $.post(applicationConfiguration.backendUrl +"playSlots", {publicKey: playerWalletInfo.publicKey}, function(response){
+   $.post(applicationConfiguration.backendUrl +"playSlots?publicKey=" + playerWalletInfo.publicKey, function(response){
+      spinSucces = true;
       playerWalletInfo.amount = response.balance;
       lastWinning = response.winning;
       spinResult = response.spinFollowNumber;
       newResult = {"wonTime":response.spinDateTime,"amount": response.winning};
-    }).fail(function(response) {
-      if(typeof response.responseText == 'undefined') {
+    }).fail(function(xhr) {
+      spinSucces = false;
+      if(typeof xhr.responseText == 'undefined') {
         alert('Spinmachine backend unavailable. No spin was deducted from your balance.');
       } else {
-        var jsonResponse = JSON.parse(response.responseText);
-        alert('Error when spinning: ' + jsonResponse.message)
+        try {
+          var jsonResponse = JSON.parse(xhr.responseText);
+          alert('Error when spinning: ' + jsonResponse.message)
+        } catch(err) {
+          console.log(err);
+          alert('An unknown error occured.');
+        }
       }
     });
 }
@@ -331,7 +341,7 @@ $( document ).ready(function() {
   });
   loginButton.addEventListener('click', function() {
     var publicKeyInput = document.getElementById("publicKey");
-    $.post(applicationConfiguration.backendUrl + "loginPublicKey", {publicKey: publicKeyInput.value}, function(response){
+    $.post(applicationConfiguration.backendUrl + "loginPublicKey?publicKey=" + publicKeyInput.value, function(response){
       playerWalletInfo = response;
       renderFullPlayerWalletInfo();
     }).fail(function(xhr) {
