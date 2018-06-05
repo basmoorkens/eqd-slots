@@ -1,0 +1,378 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>EQD spin to win</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=2.0">
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="./styles/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="./library/jquery.slotmachine.css" type="text/css" media="screen" />
+    <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v2.0.0/dist/clipboard.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="./library/slotmachine.js"></script>
+    <script src="./js/config.js"></script>
+  </head>
+
+  <body>
+    <div id="slot">
+        <div id="leftbar">
+           <div id="instructions">
+            <h1 class="upper">Instructions</h1>
+              <div>
+                <p>
+                  Welcome to the <strong><i>EQD Spin to Win</i></strong> game. <br />
+                  In this game you can spin the wheel to win an EQD prize.<br />
+                  This game was made to promote the EQD token and it pays out 100% of the funds that go into it + a bit extra ;-)<br />
+                  For this reason the fee to spin is fixed to <strong style="color:black">100 EQD</strong><br />
+                  Good luck!
+                </p>
+                <hr class="styled" />
+                <p>
+                  <h3 class="subtitle">How to start playing?</h3>
+                  <p>
+                    * Create an account by depositing EQD from your wallet into the game wallet:<br /><br />
+                    <span id="gameWalletAddr" class="walletAddr">GD472ON4HETV466W3WNQMAKDLAGVJBLKFXV4RNPPDAKPYW6FIM36QBQI</span>
+                    <button class="btncp" data-clipboard-target="#gameWalletAddr" style="margin-left:5px;"><i class="fa fa-copy"></i></button>
+                    <br /><br />
+                    <small><i>It can take up to 10 minutes to process your deposit.</i></small><br />
+                    <small><i>If you don't own Equid see the section below on how to get Equid</i></small>
+                  </p>
+                  <p>
+                    * Login to the game by using the publickey from your wallet.
+                  </p>
+                  <p>
+                    * Spin the wheel to win prizes.
+                  </p>
+                  <p>
+                    * Request a payout if you wish to withdraw funds to your wallet.
+                  </p>
+                </p>
+                <hr class="styled" />
+                <p>
+                  <h3 class="subtitle">Get Equid</h3>
+                  <p> 
+                    <a target="_blank" href="https://stellarterm.com/#exchange/EQD-equid.co/XLM-native">You can purchase Equid on the stellarterm exchange.</a><br /><br />
+                    The issuing address for EQD is <span id="issuerWallet" class="walletAddr">GCGEQJR3E5BVMQYSNCHPO6NPP3KOT4VVZHIOLSRSNLE2GFY7EWVSLLTN</span>
+                    <button class="btncp" data-clipboard-target="#issuerWallet" style="margin-left:5px;"><i class="fa fa-copy"></i></button>
+                  </p>
+                </p>
+                <hr class="styled" />
+                <p>
+                  <h3 class="subtitle">Spin prizes</h3>
+                  The prizes in the spinmachine are <br />
+                 <span class="payoutEntry">0</span>,
+                 <span class="payoutEntry">100</span>,
+                 <span class="payoutEntry">200</span>,
+                 <span class="payoutEntry">500</span>,
+                 <span class="payoutEntry">1000</span>.
+                 <span class="payoutEntry">50000</span>.
+               </p>
+              </div>
+          </div>
+           <div id="lastResults">
+             <p>
+                <h3 class="subtitle">
+                  Playing as 
+                </h3>
+                <span id="loggedInAs"></span>
+            </p>
+            <hr class="styled" />
+            <p>
+              <h3 class="subtitle">Winnings</h3>
+                <p>
+                  The winnings of your last 10 spins are shown here.
+                </p>
+              <table id="lastResultsTable">
+                <thead>
+                  <tr>
+                    <th>Time</th>
+                    <th>Win</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                </tbody>
+              </table>
+            </p>
+            <hr class="styled" />
+            <p>
+              <h3 class="subtitle">Add credits</h3>
+              To add more credits you can send more EQD from your wallet to the game wallet on<br />
+              <span id="gameWalletAddr2" class="walletAddr2">GD472ON4HETV466W3WNQMAKDLAGVJBLKFXV4RNPPDAKPYW6FIM36QBQI</span><br />
+              <button class="btncp" data-clipboard-target="#gameWalletAddr2" style="margin-left:5px;"><i class="fa fa-copy"></i></button><br />
+              <small><i>The processing of your deposit may take up to 10 minutes.</i></small>
+            </p>
+            <hr class="styled" />
+            <p>
+              <h3 class="subtitle">How to get a payout to your wallet?</h3>
+              You can request a payout to your wallet by using the <strong style="color:black">payout</strong> button on the slotmachine.<br />
+              <small><i>Your withdrawal may take up to 10 minutes.</i></small>
+            </p>
+         </div>
+          <div id="contact">
+            <h1 class="upper">Contact</h1>
+            <p>
+              If you have any questions or need support contact me on <a href="mailto:bas.moorkens@gmail.com">bas.moorkens@gmail.com</a><br />
+            </p>
+            <hr class="styled" />
+            <p>
+              Like the game? Consider dropping a Stellar donation to the dev on <br />
+              <span id="donateAddr" class="walletAddr">GA7PSSZDIGORA7MK2QFNDLU3IYWIXOIPQU3NC7YHRWPSH43FFFZGVLG7</span>
+              <button class="btncp" data-clipboard-target="#donateAddr" style="margin-left:5px;"><i class="fa fa-copy"></i></button>
+            </p>
+          </div>
+      </div>
+      <div id="container">
+      <div id="login">
+          <h1 class="upper">
+            Login with your stellar public key
+          </h1>
+          <div id="loginDetail">
+            <input type="text" id="publicKey" />
+            <a href="#" id="loginButton">login</a>
+          </div>
+      </div>
+
+      <div id="slotMachine">
+        <div id="spinHeader">
+            <h1>EQD Spin to win</h1>
+        </div>
+        <div id="spinnerBody">
+            <div id="spinner">
+                <div class="slotResult topLine">
+                  0
+                </div>
+                <div class="slotResult topLine">
+                  100
+                </div>
+                <div class="slotResult topLine">
+                  200
+                </div>
+                <div class="slotResult topLine">
+                  500
+                </div>
+                <div class="slotResult topLine bottomLine">
+                  1000
+                </div>
+                 <div class="slotResult topLine bottomLine">
+                  50000
+                </div>
+              </div>
+          </div>
+          <div id="spinFooter">
+            <div id="credits">
+              Credits
+              <span id="creditsValue">
+                0
+              </span>
+            </div>
+            <div id="betAmount">
+              Bet
+              <span id="betAmountValue">
+                
+              </span>
+            </div>
+            <div id="lastResult">
+              Last spin
+              <span id="lastResultValue">
+
+              </span>
+            </div>
+            <div id="payoutBuyttonContainer">
+              <button id="payoutButton">Payout</button>
+            </div>
+            <div id="spinButtonContainer">
+              <button id="spinButton">Spin</button>
+            </div>
+          </div>
+      </div>
+    </div>
+    </div>
+
+    <div id="payoutDialog" title="Request payout">
+        <h1 class="upper">Payouts</h1>
+        <p>
+          Fill in the amount you want to get paid out in the box below.<br />
+          <input type="text" id="amountToPay" style="width:100%"/>
+          <div id="doPayoutButtonContainer">
+              <a href="#" id="doPayoutButton">Payout</a>
+            </div>
+        </p>
+    </div>
+<script id="codeScript4">
+const loginButton = document.querySelector('#loginButton');
+const spinButton = document.querySelector('#spinButton');
+const elTriky = document.querySelector('#spinner');
+var playerWalletInfo;
+var lastWinning=0;
+var spinResult=0;
+var spinSucces = true;
+var spinActive = true;
+const slotMachine = new SlotMachine(elTriky, {
+  randomize() {
+    return spinResult;
+  },
+  onComplete() {
+    if(spinSucces) {
+      updateDynamicPlayerWalletInfo();
+      addResultToTable();
+    }
+    document.getElementById("spinButton").disabled = false;
+  }
+});
+
+var newResult;
+
+$( "#payoutDialog" ).dialog({
+      autoOpen: false,
+      modal: true,
+      width: 600,
+      height: 350,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+ 
+ $( "#doPayoutButton" ).on( "click", function() {
+      var amount = $("#amountToPay").val();
+      if(isNaN(amount)){
+        alert("Amount to withdraw must be a number!");
+      } else {
+        if(amount <= 0) {
+          alert("Amount must be greater then 0!");
+        } else {
+          $.post(applicationConfiguration.backendUrl +"payout?publicKey=" +playerWalletInfo.publicKey+ "&amount=" +amount, function(response){
+            alert("We have received your payout request for " + amount + "EQD. Payouts can take up to 10 minutes.");
+            playerWalletInfo.amount = playerWalletInfo.amount - amount;
+            renderPlayerWalletInfo();
+            $("#payoutDialog").dialog("close");
+            $("#amountToPay").val(0);
+          }).fail(function(xhr) {
+            console.log(xhr);
+            if(xhr.responseJSON != null) {
+              alert('Error whilst processing payout: ' + xhr.responseJSON.message );
+            } else {
+              alert('Spin to win backend unavailable');
+            }
+          });
+        }
+      }
+    });
+
+    $( "#payoutButton" ).on( "click", function() {
+      $( "#payoutDialog" ).dialog( "open" );
+    });
+
+function getSpinResult () {
+   $.post(applicationConfiguration.backendUrl +"playSlots?publicKey=" + playerWalletInfo.publicKey, function(response){
+      spinSucces = true;
+      playerWalletInfo.amount = response.balance;
+      lastWinning = response.winning;
+      spinResult = response.spinFollowNumber;
+      newResult = {"wonTime":response.spinDateTime,"amount": response.winning};
+    }).fail(function(xhr) {
+      spinSucces = false;
+      if(typeof xhr.responseText == 'undefined') {
+        alert('Spinmachine backend unavailable. No spin was deducted from your balance.');
+      } else {
+        try {
+          var jsonResponse = JSON.parse(xhr.responseText);
+          alert('Error when spinning: ' + jsonResponse.message)
+        } catch(err) {
+          console.log(err);
+          alert('An unknown error occured.');
+        }
+      }
+    });
+}
+
+function addResultToTable() {
+  if($('#lastResultsTable tr').length > 10) {
+      $('#lastResultsTable tr:last').remove();
+  }
+  $("<tr><td>"+ newResult.wonTime+"</td><td>"+ newResult.amount +"</td></tr>").insertBefore("#lastResultsTable > tbody > tr:first");
+}
+
+function updateDynamicPlayerWalletInfo() { 
+    $("#creditsValue").text(playerWalletInfo.amount);
+    $("#lastResultValue").text(lastWinning);
+}
+
+function renderPlayerWalletInfo() {
+  if(playerWalletInfo != null) {
+    $("#login").hide(100);
+    $("#instructions").hide(100);
+    $("#loggedInAs").text(playerWalletInfo.publicKey.substring(0,15)+ "..." + playerWalletInfo.publicKey.substring(41,56));
+    $("#slotMachine").css('visibility', 'visible');
+    $("#lastResults").show(100);
+    updateDynamicPlayerWalletInfo();
+  }
+}
+
+function renderFullPlayerWalletInfo () {
+  renderPlayerWalletInfo();
+  renderLastResults();
+}
+
+function renderLastResults() {
+  if( playerWalletInfo.lastWinnings != null ) {
+    for (var i = 0; i < playerWalletInfo.lastWinnings.length; i++) {
+      var lastResult = playerWalletInfo.lastWinnings[i];
+      $("#lastResultsTable tbody").append("<tr><td>"+ lastResult.wonTime+"</td><td>"+ lastResult.amount +"</td></tr>");
+    }
+  }
+  $("#lastResults").show(1000);
+}
+
+  function doSpin() { 
+    document.getElementById("spinButton").disabled = true;
+    getSpinResult();
+    slotMachine.shuffle(8); 
+    }
+
+$( document ).ready(function() {
+  $("#betAmountValue").text(applicationConfiguration.betAmount);
+  spinButton.addEventListener('click', function () { 
+    if(playerWalletInfo.amount <= 0) {
+     alert("You have insufficient credits to spin. Please deposit more EQD into the game wallet.");
+    } else {
+     doSpin();  
+    }
+  });
+  loginButton.addEventListener('click', function() {
+    var publicKeyInput = document.getElementById("publicKey");
+    $.post(applicationConfiguration.backendUrl + "loginPublicKey?publicKey=" + publicKeyInput.value, function(response){
+      playerWalletInfo = response;
+      renderFullPlayerWalletInfo();
+    }).fail(function(xhr) {
+        if(xhr.responseJSON != null) {
+          alert('Error logging in: ' + xhr.responseJSON.message );
+        } else {
+          alert('Spin to win backend unavailable');
+        }
+    });
+  });   
+});
+
+new ClipboardJS('.btncp');
+
+</script>
+
+  </body>
+</html>
