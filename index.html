@@ -311,6 +311,11 @@ function addResultToTable() {
 function updateDynamicPlayerWalletInfo() { 
     $("#creditsValue").text(playerWalletInfo.amount);
     $("#lastResultValue").text(lastWinning);
+    if(playerWalletInfo.amount <= 0) {
+      document.getElementById("spinButton").disabled = true;
+    } else {
+      document.getElementById("spinButton").disabled = false;
+    }
 }
 
 function renderPlayerWalletInfo() {
