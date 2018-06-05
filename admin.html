@@ -41,10 +41,6 @@
               <td><span id="totalSpins"></span></td>
             </tr>
             <tr>
-              <td>Big payout on next spin?</td>
-              <td><span id="nextSpinBigWin"></span></td>
-            </tr>
-            <tr>
               <td>Results since last big win</td>
               <td><span id="resultsSinceLastBigwin"></span></td>
             </tr>
@@ -68,13 +64,16 @@
           <table id="statsSinceLastBigWinTable">
             <thead>
               <tr>
-                <th>Price won</th>
-                <th>Amount of times</th>
+                <th>Prize</th>
+                <th>x won</th>
+                <th>Fee</th>
+                <th>Total</th>
               </tr>
               </thead>
               <tbody>
               </tbody>
           </table>
+          <div id="totalResults"></div>
         </p>
       </div>
       <script type="text/javascript">
@@ -88,7 +87,6 @@
             $("#totalInGamewallet").text(adminStats.amountInWallet);
             $("#totalInGamewalletMinusPlayerBalances").text(adminStats.actualAmountInWallet);
             $("#totalSpins").text(adminStats.totalSpins);
-            $("#nextSpinBigWin").text(adminStats.bigPayoutActive);
             $("#resultsSinceLastBigwin").text(adminStats.resultsSinceLastBigWin);
             if( adminStats.playerWallets != null ) {
               for (var i = 0; i < adminStats.playerWallets.length; i++) {
@@ -97,19 +95,24 @@
               }
             }
             if( adminStats.statsSinceLastBigWin != null ) {
+              var totalCost= 0;
+              var totalIncome = 0;
               for (var i = 0; i < adminStats.statsSinceLastBigWin.length; i++) {
+                var total = (stat.fee * stat.count) - (stat.price * stat.count)
+                totalincome += stat.count * stat.fee;
+                totalCost += stat.count * stat.price;
                 var stat = adminStats.statsSinceLastBigWin[i];
-                $("#statsSinceLastBigWinTable tbody").append("<tr><td>"+ stat.price+"</td><td>"+ stat.count +"</td></tr>");
+                $("#statsSinceLastBigWinTable tbody").append("<tr><td>"+ stat.price+"</td><td>"+ stat.count +"</td><td></td>"+stat.fee+"<td>" + total + "</td></tr>");
+                #("$totalResults").text("Since the last 50K win there the game wallet has given " + totalCost + " in prizes and has taken " + totalIncome + "  in fees.");
               }
             }
-            resultsSinceLastBigwin
           }
         }
 
         $( document ).ready(function() {
           loginButton.addEventListener('click', function() {
             var privateKeyInput = document.getElementById("privateKey");
-            $.post(applicationConfiguration.backendUrl + "getAdminStats", {privateKey: privateKeyInput.value}, function(response){
+            $.post(applicationConfiguration.backendUrl + "getAdminStats?privateKey=" + privateKeyInput.value, function(response){
               adminStats = response;
               renderAdminStats();
             }).fail(function(xhr) {
