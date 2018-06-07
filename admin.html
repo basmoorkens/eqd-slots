@@ -98,13 +98,13 @@
               var totalCost= 0;
               var totalIncome = 0;
               for (var i = 0; i < adminStats.statsSinceLastBigWin.length; i++) {
-                var total = (stat.fee * stat.count) - (stat.price * stat.count)
-                totalincome += stat.count * stat.fee;
-                totalCost += stat.count * stat.price;
                 var stat = adminStats.statsSinceLastBigWin[i];
+                var total = (stat.fee * stat.count) - (stat.price * stat.count);
+                totalIncome += stat.count * stat.fee;
+                totalCost += stat.count * stat.price;
                 $("#statsSinceLastBigWinTable tbody").append("<tr><td>"+ stat.price+"</td><td>"+ stat.count +"</td><td></td>"+stat.fee+"<td>" + total + "</td></tr>");
-                #("$totalResults").text("Since the last 50K win there the game wallet has given " + totalCost + " in prizes and has taken " + totalIncome + "  in fees.");
               }
+              $("$totalResults").text("Since the last 50K win there the game wallet has given " + totalCost + " in prizes and has taken " + totalIncome + "  in fees.");
             }
           }
         }
