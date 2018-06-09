@@ -142,8 +142,8 @@ header a {
 
 
 .slotResult {
-  font-size: 9em;
-  letter-spacing: 0.15em;
+  font-size: 8em;
+  letter-spacing: 0.10em;
   font-weight: bold;
   text-align: center;
   
@@ -182,7 +182,7 @@ padding-bottom:0.3em;
 #spinner { 
   background-color: #89AAE6;
   width: 60%;
-  height: 28em;
+  height: 24em;
   padding-top: 6em;
   margin-left:20%;
   color:black;
@@ -191,6 +191,18 @@ padding-bottom:0.3em;
   }
 
 #spinFooter{
+background-color: #0471A6;
+color:white;
+border:  #195AC8 solid 3px;
+border-bottom: #195AC8 solid 3px;
+border-top-right-radius: 0px;
+border-bottom-right-radius: 0px;
+border-right: 0px;
+text-transform: uppercase;
+height:4.5em;
+}
+
+#spinFooterBis{
 background-color: #0471A6;
 color:white;
 border:  #195AC8 solid 3px;
