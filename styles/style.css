@@ -601,3 +601,11 @@ visibility: hidden;
 .btncp:hover{
   cursor:pointer;
 }
+
+#geteqd a {
+  color:black;
+}
+
+#geteqd a:hover {
+  color:black;
+}
